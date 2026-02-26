@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Small Thing From My Heart 🌹</title>
+
+<style>
+:root {
+  --glass: rgba(255,255,255,0.12);
+  --roseGlow: rgba(255,182,193,0.6);
+}
+
+* { box-sizing: border-box; }
+
+
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #5a0f2e, #2b0617, #12030a);
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* Floating hearts */
+.romance span {
+  position: fixed;
+  font-size: 18px;
+  animation: float 18s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float {
+  from { transform: translateY(110vh); opacity: 0; }
+  to { transform: translateY(-10vh); opacity: 1; }
+}
+
+/* Layout */
+.container {
+  max-width: 650px;
+  margin: auto;
+  padding: 25px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+#popup.active {
+  display: flex !important;
+  /* Radiant pink glow background */
+  background: radial-gradient(circle, rgba(255, 182, 193, 0.9) 0%, rgba(59, 10, 26, 0.95) 100%);
+  animation: bgPulse 4s infinite alternate;
+}
+
+@keyframes bgPulse {
+  from { background-color: rgba(59, 10, 26, 0.9); }
+  to { background-color: rgba(122, 28, 53, 0.9); }
+}
+
+.popup-box {
+  /* Adding a glow to the box itself */
+  box-shadow: 0 0 50px rgba(255, 192, 203, 0.8);
+  border: 2px solid #fff;
+  position: relative;
+  z-index: 31;
+}
+
+.card {
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  border-radius: 28px;
+  padding: 30px;
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  animation: fade 0.9s ease;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.romantic-img {
+  max-width: 65%;
+  border-radius: 14px;
+  margin: 14px auto;
+  display: block;
+  box-shadow: 0 0 35px rgba(0,0,0,0.45);
+}
+
+/* Buttons */
+button {
+  padding: 14px 32px;
+  border-radius: 45px;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.primary {
+  background: linear-gradient(135deg, #f3c1cc, #e7a1b0);
+  color: #3b0a1a;
+  box-shadow: 0 0 30px var(--roseGlow);
+}
+
+.yes {
+  background: linear-gradient(135deg, #ffd1dc, #f4b6c2);
+  color: #3b0a1a;
+  box-shadow: 0 0 35px var(--roseGlow);
+}
+
+.no {
+  background: linear-gradient(135deg, #7a1c35, #9b2c4f);
+  color: #fff;
+  position: absolute;
+}
+
+.choices {
+  margin-top: 35px;
+  height: 140px;
+  position: relative;
+}
+
+/* 🌌 STAR TRANSITION */
+#starTransition {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, #0b0f2a, #000);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 20;
+  transition: opacity 2.2s ease;
+}
+
+#starTransition.active {
+  opacity: 1;
+}
+
+/* Heart-shaped stars */
+.stars-layer {
+  width: 100%;
+  height: 100%;
+  background-image:
+    radial-gradient(2px 2px at 50% 25%, white, transparent),
+    radial-gradient(2px 2px at 42% 35%, white, transparent),
+    radial-gradient(2px 2px at 58% 35%, white, transparent),
+    radial-gradient(2px 2px at 38% 45%, white, transparent),
+    radial-gradient(2px 2px at 62% 45%, white, transparent),
+    radial-gradient(2px 2px at 45% 55%, white, transparent),
+    radial-gradient(2px 2px at 55% 55%, white, transparent),
+    radial-gradient(2px 2px at 50% 65%, white, transparent);
+  animation: twinkle 6s linear infinite;
+}
+
+@keyframes twinkle {
+  from { transform: translateY(0); }
+  to { transform: translateY(-25px); }
+}
+
+/* Rebooting text */
+.star-text {
+  position: absolute;
+  bottom: 18%;
+  width: 100%;
+  text-align: center;
+  color: #ffe6ee;
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: fadeText 2s ease forwards;
+}
+
+@keyframes fadeText {
+  to { opacity: 1; }
+}
+
+/* Popup */
+#popup {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(18,3,10,0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+}
+
+.popup-box {
+  background: linear-gradient(135deg, #fff1f4, #f8d7df);
+  color: #3b0a1a;
+  padding: 32px;
+  border-radius: 30px;
+  max-width: 90%;
+}
+</style>
+</head>
+<audio id="bgMusic" loop>
+  <source src="iMusico_-_Can_t_Help_Falling_in_Love_Violin_Cover_(mp3.pm).mp3" type="audio/mpeg">
+</audio>
+
+<body>
+
+<!-- Floating hearts -->
+<div class="romance">
+  <span style="left:10%">❤️</span>
+  <span style="left:30%">❤️</span>
+  <span style="left:50%">❤️</span>
+  <span style="left:70%">❤️</span>
+  <span style="left:90%">❤️</span>
+</div>
+
+<div class="container">
+  <div class="card" id="screen"></div>
+</div>
+
+<!-- 🌌 STAR OVERLAY -->
+<div id="starTransition">
+  <div class="stars-layer"></div>
+  <div class="star-text">Rebooting us… ✨</div>
+</div>
+
+<!-- POPUP -->
+<div id="popup">
+  
+  <canvas id="glitterCanvas" style="position:absolute; inset:0; pointer-events:none;"></canvas>
+  <div class="popup-box">
+   <h2>😌 Install Updated…</h2>
+
+Look at you choosing reboot.<br><br>
+
+Guess that shark heart<br>
+does come with feelings after all 🦈💖<br><br>
+You’re the most handsome bug I’ve ever had the pleasure of debugging.<br><br>
+  Now, please initiate the 'Welcome Back' kiss protocol👩‍❤️‍💋‍👨<br><br>
+  <img src="WhatsApp Image 2026-02-26 at 15.32.41.jpeg" class="romantic-img">
+</p>
+  </div>
+</div>
+
+<script>
+const screen = document.getElementById("screen");
+const popup = document.getElementById("popup");
+const stars = document.getElementById("starTransition");
+let yesSize = 1;
+
+function setScreen(html) {
+  screen.innerHTML = html;
+}
+
+setScreen(`
+  <h1>Hey… Thank You 💌</h1>
+  <p>
+    Thankyou for clicking this link. Please stay till the end.<br><br>
+    This took me lots of coding, overthinking,courage, <br>
+    and emotions.🫠<br><br>
+    <img src="WhatsApp Image 2026-02-26 at 19.06.23.jpeg" class="romantic-img">
+    
+    But you were worth it.
+  </p>
+  <button class="primary" onclick="welcome()">Continue →</button>
+`);
+const music = document.getElementById("bgMusic");
+function welcome() {
+  music.play().catch(error => console.log("Playback prevented:", error));
+  setScreen(`
+    <h1>Welcome Atik 🦈</h1>
+    <img src="image.png" class="romantic-img">
+    
+    <button class="primary" onclick="glitch()">Next →</button>
+  `);
+}
+function glitch() {
+  setScreen(`
+<h1>Oops 😬</h1>
+<p>Sorry… tiny glitch in the system 🌹</p>
+<button class="primary" onclick="realPic()">Fix It →</button>
+`);
+}
+
+function realPic() {
+
+  setScreen(`
+    <h1>There You Are 😌</h1>
+    <img src="myphoto2.jpeg" class="romantic-img">
+    <p> Much better.<br><br> Still shark energy…<br> but definitely a heart that feels...Right bruce??</p>
+    <p>A tiny corner of the internet made just for you.💗</p>
+    <button class="primary" onclick="secret()">A secret question for you!</button>
+  `);
+}
+
+function secret() {
+  setScreen(`
+    <h1>💭</h1>
+   <p> A required dependency named "Atik"
+
+is missing from my life directory.<br><br>
+
+Status: 404 Heart Not Found<br><br>
+
+Bug Type: Chronic Missing-You Syndrome<br><br>
+     I said your heart was running on “shark OS” —<br> 
+    no emotions, just survival mode <br><br> 
+    But after extensive testing (and dramatic overthinking),<br> 
+    I’ve realized something simple:<br><br> 
+    People without feelings don’t read this far.<br>
+    <br> They don’t stay curious.<br> And they don’t make someone miss them like this.
+    <br><br> Do we really need a shutdown,<br> or just a clean reboot? 💖 <br><br>
+    Be careful Shutdown button is jumpy sometimes. </p>
+    
+   
+
+    <div class="choices">
+      <button class="yes" id="yes">🔄 Clean Reboot</button>
+      <button class="no" id="no">⛔ Shutdown</button>
+    </div>
+  `);
+
+  const yes = document.getElementById("yes");
+  const no = document.getElementById("no");
+
+  function dodge() {
+    no.style.left = Math.random() * 80 + "%";
+    no.style.top = Math.random() * 80 + "px";
+    yesSize += 0.08;
+    yes.style.transform = `scale(${yesSize})`;
+  }
+
+  no.onmouseover = dodge;
+  no.ontouchstart = dodge;
+
+  yes.onclick = () => {
+    stars.classList.add("active");
+    setTimeout(() => popup.style.display = "flex", 2200);
+  };
+}
+</script>
+
+</body>
+</html>
